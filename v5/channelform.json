@@ -1,0 +1,39 @@
+{
+  "grid": [
+    { "id": "p1", "xs": 6, "class": "main", "table": "devhard" },
+    { "id": "p2", "xs": 6, "class": "main", "table": "devhard" },
+    { "id": "p9", "xs": 12, "class": "main", "table": "onechannelrtTable", "hide": "!data.p2.r" }
+  ],
+  "spacing": 4,
+
+  "p1": [
+    { "prop": "chan", "title": "Channel ID", "type": "input" },
+    { "prop": "name", "title": "Name", "type": "input" },
+    { "prop": "address", "title": "Group address (x/x/x format)", "type": "input" },
+    { "prop": "dpt", "title": "Datapoint type (x.xxxx format)", "type": "input" },
+    { "prop": "diffw", "title": "Different address to write", "type": "cb", "hide": "!data.p2.w"},
+    { "prop": "waddress", "title": "Group address to write (x/x/x format)", "type": "input","hide": "!data.p1.diffw" },
+    { "prop": "wdpt", "title": "Datapoint type to write (x.xxxx format)", "type": "input", "hide": "!data.p1.diffw"}
+],
+  "p2": [
+    { "prop": "rs", "title": "Read on start", "type": "cb", "hide": "!data.p2.r" },
+    { "prop": "r", "title": "Read", "type": "cb" },
+    { "prop": "calc", "title": "Read value calculate", "type": "input", "hide": "!data.p2.r" },
+    { "prop": "w", "title": "Write", "type": "cb"},
+    { "prop": "calc_out", "title": "Write value calculate", "type": "input", "hide": "!data.p2.w" },
+    { "prop": "header_testwrite", "title": "Write test", "type": "header", "hide": "!data.p2.w" },
+    { "prop": "testValue", "title": "Write value", "type": "input", "hide": "!data.p2.w" },
+    {
+      "prop": "writeButton",
+      "title": "$doWrite",
+      "type": "button",
+      "command": "writetochannel",
+      "param": "write",
+      "hide": "!data.p2.w"
+    }
+  ],
+  "p9": [
+    { "prop": "realtime_chan_str", "title": "Channel", "type": "text" },
+    { "prop": "realtime_dev_str", "title": "Device", "type": "text" }
+  ]
+}

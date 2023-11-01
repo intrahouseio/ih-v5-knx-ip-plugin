@@ -1,0 +1,24 @@
+{
+  "name": "knxip",
+  "module": "index.js",
+  "single": 0,
+  "comment": "Это файл-манифест. Содержит настройки, команды плагина. ",
+  "plugin_popup": [
+    {
+      "id": "import_xml",
+      "type": "item",
+      "title": "Import channels from ETS XML",
+      "command": "upload",
+      "param": "plugin_command:uploadXml"
+    }
+  ],
+  "default_channel": {
+    "r": 1,
+    "w": 0,
+    "rs": 0,
+    "chan": "0",
+    "name": "KNX point",
+    "address": "1/1/1"
+  },
+  "ext": [{ "prop": "connection", "note": "IP connection", "vtype": "N" }]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "knxip",
+  "version": "5.0.2",
+  "description": "ih package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hofmaker",
+  "license": "MIT",
+  "dependencies": {
+    "knx": "^2.5.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {}
+}
