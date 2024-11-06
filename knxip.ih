@@ -3,5 +3,5 @@
     "description":"KNX IP gateway plugin",
     "comment":"файл .ih используется для опеределения версии и обновлений.",
     "cross":false,
-	"version":"5.0.2"
+	"version":"5.0.3"
 }
