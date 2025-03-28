@@ -20,5 +20,8 @@
     "name": "KNX point",
     "address": "1/1/1"
   },
-  "ext": [{ "prop": "connection", "note": "IP connection", "vtype": "N" }]
+  "ext": [
+      { "prop": "connection", "note": "IP connection", "vtype": "N" },
+      { "prop": "readonstart", "note": "Read on start", "vtype": "N" }
+    ]
 }
