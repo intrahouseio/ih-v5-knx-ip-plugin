@@ -9,16 +9,18 @@
       "prop": "unitchannelsTable",
 
       "columns": [
-        { "prop": "chan", "title": "Channel", "type": "link", "command": "forward", "width": 250 },
-        { "prop": "did", "title": "Device", "type": "link", "command": "forward", "width": 250 },
-        { "prop": "prop", "title": "DeviceProperty", "type": "text", "width": 64 },
-        { "prop": "address", "title": "Group address", "type": "text", "width": 64 },
-        { "prop": "realtime_chan_val", "title": "Channel: value", "type": "text", "width": 64 },
-        { "prop": "realtime_chan_ts", "title": "Channel: time", "type": "text", "width": 150 },
-        { "prop": "realtime_dev_val", "title": "Device: value", "type": "text", "width": 64 },
-        { "prop": "realtime_dev_ts", "title": "Device: time", "type": "text", "width": 150 },
-        { "prop": "realtime_dev_cts", "title": "Update time", "type": "text", "width": 150 },
-        { "prop": "realtime_dev_err", "title": "Error", "type": "text", "width": 150 }
+        { "prop": "chan", "title": "Channel", "type": "link", "command": "forward", "width": 250, "filter": true },
+        { "prop": "did", "title": "Device", "type": "link", "command": "forward", "width": 250, "filter": true },
+        { "prop": "prop", "title": "DeviceProperty", "type": "text", "width": 64, "filter": true },
+        { "prop": "address", "title": "Group address", "type": "text", "width": 64, "filter": true },
+        { "prop": "dpt", "title": "DPT", "type": "input", "width": 64, "filter": true },
+        { "prop": "realtime_chan_val", "title": "Channel: value", "type": "text", "width": 64, "filter": true },
+        { "prop": "realtime_chan_ts", "title": "Channel: time", "type": "text", "width": 150, "filter": true },
+        { "prop": "realtime_dev_val", "title": "Device: value", "type": "text", "width": 64, "filter": true },
+        { "prop": "realtime_dev_ts", "title": "Device: time", "type": "text", "width": 150, "filter": true },
+        { "prop": "realtime_dev_cts", "title": "Update time", "type": "text", "width": 150, "filter": true },
+        { "prop": "realtime_chan_chstatus", "title": "Channel status", "type": "text", "width": 64, "filter": true },
+        { "prop": "realtime_dev_err", "title": "Error", "type": "text", "width": 150, "filter": true }
       ]
     }
   ]
