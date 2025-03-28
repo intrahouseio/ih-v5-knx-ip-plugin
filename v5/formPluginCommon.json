@@ -1,7 +1,9 @@
 {
   "grid": [
-    { "id": "p1", "xs": 6, "class": "main", "table": "units" },
-    { "id": "p2", "xs": 6, "class": "main", "table": "units" },
+    { "id": "p1", "xs": 3, "class": "main", "table": "units" },
+    { "id": "p2", "xs": 3, "class": "main", "table": "units" },
+    { "id": "p3", "xs": 3, "class": "main", "table": "units" },
+    { "id": "p4", "xs": 3, "class": "main", "table": "units" },
     { "id": "p9", "xs": 12, "class": "main", "table": "unitsTreeTable", "height": "fill" }
   ],
 
@@ -19,20 +21,124 @@
     {
       "prop": "port",
       "title": "KNX gateway IP port",
+      "type": "number",
+      "default": 3671
+    },
+    
+    {
+      "prop": "interface",
+      "title": "Interface",
       "type": "input",
-      "default": "3671"
+      "default": ""
+    },
+    
+    {
+      "prop": "physAddr",
+      "title": "KNX physical address",
+      "type": "input",
+      "default": "15.15.15"
     }
 
   ],
-
+  
   "p2": [
+    
+    {
+      "prop": "forceTunneling",
+      "title": "Use tunneling with multicast",
+      "type": "cb",
+      "default": false
+    },
+    
+    {
+      "prop": "suppress_ack_ldatareq",
+      "title": "Suppress the acknowledge flag",
+      "type": "cb",
+      "default": false
+    },
+    
+    {
+      "prop": "localEchoInTunneling",
+      "title": "Tunneling Echo",
+      "type": "cb",
+      "default": false
+    },
+    
+    {
+      "prop": "reqdelay",
+      "title": "Delay between request",
+      "type": "number",
+      "default": 20
+    },
+
+    {
+      "prop": "reqtimeout",
+      "title": "Timeout for read requests",
+      "type": "number",
+      "default": 200
+    }
+    
+  ],
+  
+  "p3": [
+    
+    {
+      "prop": "importR",
+      "title": "IMPORT ETS XML: Set all channels READ flag",
+      "type": "cb",
+      "default": true
+    },
+    
+    {
+      "prop": "importW",
+      "title": "IMPORT ETS XML: Set all channels WRITE flag",
+      "type": "cb",
+      "default": true
+    },
+    
+    {
+      "prop": "importRS",
+      "title": "IMPORT ETS XML: Set all channels READ ON START flag",
+      "type": "cb",
+      "default": false
+    },
+    
+    {
+      "prop": "importRSregex",
+      "title": "IMPORT ETS XML: Regex for READ ON START",
+      "type": "input",
+      "default": "STATUS,FB,READVALUE"
+    },
+    
+    {
+      "prop": "rsEnable",
+      "title": "Read on start enable",
+      "type": "cb",
+      "default": true
+    }
+    
+  ],
+
+  "p4": [
     {
       "prop": "restarttime",
       "title": "Unit Restarttime",
       "type": "number",
       "default": 5
     },
-    { "prop": "loglevel", "title": "LogLevel", "type": "droplist", "data": "loglevelList" }
+    { "prop": "loglevel", "title": "LogLevel", "type": "droplist", "data": "loglevelList" },
+    {
+      "prop": "logsize",
+      "title": "LogSize KB",
+      "type": "number",
+      "default": 1000
+    },
+    {
+      "prop": "logrotate",
+      "title": "Log Rotate Days",
+      "type": "number",
+      "default": 7
+    }
   ],
 
   "p9": [
