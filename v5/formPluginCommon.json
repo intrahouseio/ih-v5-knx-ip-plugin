@@ -37,6 +37,13 @@
       "title": "KNX physical address",
       "type": "input",
       "default": "15.15.15"
+    },
+
+    {
+      "prop": "wdtime",
+      "title": "Watchdog timeout (0 - inactive)",
+      "type": "input",
+      "default": "0"
     }
 
   ],
