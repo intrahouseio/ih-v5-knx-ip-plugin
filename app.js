@@ -10,6 +10,7 @@ module.exports = async function (plugin) {
     const port = plugin.params.port;
     const intrface = plugin.params.intrface;
     const physAddr = plugin.params.physAddr;
+    const wdtime = plugin.params.wdtime || 0;
     const reqdelay = plugin.params.reqdelay || 20;
     const reqtimeout = plugin.params.reqtimeout || 200;
     const manualConnect = 0;
@@ -24,6 +25,7 @@ module.exports = async function (plugin) {
         process.send({ type: 'procinfo', data: { connection: 0 } });
 
         let isConnected = false;
+        let watchdog;
         let toRead = [];
         let toReadOnStart = [];
         let rsBuffer = [];
@@ -42,6 +44,13 @@ module.exports = async function (plugin) {
                 let convertvalue = DPTLib.fromBuffer(buf, dptresolve);
                 //plugin.log("Resolve DPT value: " + convertvalue, 1);
                 return convertvalue;
+            }
+
+            function runwathdog() {
+                clearTimeout(watchdog);
+                watchdog = setTimeout(() => {
+                    plugin.exit(888, "Watchdog active, no has events...")
+                }, wdtime * 1000)
             }
 
             function knxWrite(msg) {
@@ -171,12 +180,15 @@ module.exports = async function (plugin) {
                         plugin.log('Connected to KNX gateway!');
                         process.send({ type: 'procinfo', data: { connection: 1 } });
 
+                        if (wdtime) { runwathdog() }
+
                         await handleChanels();
                         if (rsEnable) {
                             await readOnStart();
                         }
                     },
                     event: function (evt, src, dest, value) {
+                        if (wdtime) { runwathdog() }
                         let eventchannel = toRead.find(item => item.address == dest);
                         if (eventchannel !== undefined) {
                             eventvalue = dptconvert(value, eventchannel.dpt);
@@ -198,7 +210,7 @@ module.exports = async function (plugin) {
 
             plugin.onAct(async (message) => {
                 plugin.log('Get channel message: ' + util.inspect(message.data), 1);
-                await processQueue(message); 
+                await processQueue(message);
             });
 
 
