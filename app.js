@@ -6,6 +6,8 @@ const knx = require('knx');
 const DPTLib = require('./node_modules/knx/src/dptlib');
 
 module.exports = async function (plugin) {
+    const channels = plugin.channels;
+    const devhard = plugin.devhard;
     const host = plugin.params.host;
     const port = plugin.params.port;
     const intrface = plugin.params.intrface;
@@ -28,6 +30,7 @@ module.exports = async function (plugin) {
         let watchdog;
         let toRead = [];
         let toReadOnStart = [];
+        let toWriteInit = [];
         let rsBuffer = [];
         let rsFlag = 0;
         let lastSend = performance.now;
@@ -92,15 +95,26 @@ module.exports = async function (plugin) {
             }
 
             async function handleChanels() {
-                plugin.channels.forEach(function (ch) {
+                for (let ch of channels) {
                     if (ch.r == 1) {
                         toRead.push(ch);
                     }
                     if (ch.rs == 1) {
                         toReadOnStart.push(ch);
                     }
-                });
+                }
                 plugin.log(`Channels processed: ${toRead.length} to read, ${toReadOnStart.length} to read on start.`, 1);
+                await delay(500);
+            }
+
+            async function initWriteChannels() {
+                for (let element of devhard) {
+                    if (element.r == 0 && element.w == 1) {
+                        toWriteInit.push({ id: element.chan, value: 0, chstatus: 0, quality: 0 });
+                    }
+                }
+                plugin.sendData(toWriteInit);
+                await delay(500);
             }
 
             async function readOnStart() {
@@ -183,6 +197,8 @@ module.exports = async function (plugin) {
                         if (wdtime) { runwathdog() }
 
                         await handleChanels();
+                        await initWriteChannels();
+
                         if (rsEnable) {
                             await readOnStart();
                         }
