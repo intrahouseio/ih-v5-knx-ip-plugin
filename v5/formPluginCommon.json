@@ -1,131 +1,140 @@
 {
   "grid": [
-    { "id": "p1", "xs": 3, "class": "main", "table": "units" },
-    { "id": "p2", "xs": 3, "class": "main", "table": "units" },
-    { "id": "p3", "xs": 3, "class": "main", "table": "units" },
-    { "id": "p4", "xs": 3, "class": "main", "table": "units" },
-    { "id": "p9", "xs": 12, "class": "main", "table": "unitsTreeTable", "height": "fill" }
+    {
+      "id": "p1",
+      "xs": 3,
+      "class": "main",
+      "table": "units"
+    },
+    {
+      "id": "p2",
+      "xs": 3,
+      "class": "main",
+      "table": "units"
+    },
+    {
+      "id": "p3",
+      "xs": 3,
+      "class": "main",
+      "table": "units"
+    },
+    {
+      "id": "p4",
+      "xs": 3,
+      "class": "main",
+      "table": "units"
+    },
+    {
+      "id": "p9",
+      "xs": 12,
+      "class": "main",
+      "table": "unitsTreeTable",
+      "height": "fill"
+    }
   ],
-
   "spacing": 10,
-
   "p1": [
-   
     {
       "prop": "host",
       "title": "KNX gateway IP",
       "type": "input",
       "default": "127.0.0.1"
     },
-
     {
       "prop": "port",
       "title": "KNX gateway IP port",
       "type": "number",
       "default": 3671
     },
-    
     {
       "prop": "interface",
       "title": "Interface",
       "type": "input",
       "default": ""
     },
-    
     {
       "prop": "physAddr",
       "title": "KNX physical address",
       "type": "input",
       "default": "15.15.15"
     },
-
     {
       "prop": "wdtime",
       "title": "Watchdog timeout (0 - inactive)",
       "type": "input",
       "default": "0"
     }
-
   ],
-  
   "p2": [
-    
     {
       "prop": "forceTunneling",
       "title": "Use tunneling with multicast",
       "type": "cb",
       "default": false
     },
-    
     {
       "prop": "suppress_ack_ldatareq",
       "title": "Suppress the acknowledge flag",
       "type": "cb",
       "default": false
     },
-    
     {
       "prop": "localEchoInTunneling",
       "title": "Tunneling Echo",
       "type": "cb",
       "default": false
     },
-    
     {
       "prop": "reqdelay",
       "title": "Delay between request",
       "type": "number",
       "default": 20
     },
-
     {
       "prop": "reqtimeout",
       "title": "Timeout for read requests",
       "type": "number",
       "default": 200
     }
-    
   ],
-  
   "p3": [
-    
+    {
+      "prop": "importUpdateAll",
+      "title": "IMPORT ETS XML: Update all channels",
+      "type": "cb",
+      "default": false
+    },
     {
       "prop": "importR",
       "title": "IMPORT ETS XML: Set all channels READ flag",
       "type": "cb",
       "default": true
     },
-    
     {
       "prop": "importW",
       "title": "IMPORT ETS XML: Set all channels WRITE flag",
       "type": "cb",
       "default": true
     },
-    
     {
       "prop": "importRS",
       "title": "IMPORT ETS XML: Set all channels READ ON START flag",
       "type": "cb",
       "default": false
     },
-    
     {
       "prop": "importRSregex",
       "title": "IMPORT ETS XML: Regex for READ ON START",
       "type": "input",
       "default": "STATUS,FB,READVALUE"
     },
-    
     {
       "prop": "rsEnable",
       "title": "Read on start enable",
       "type": "cb",
       "default": true
     }
-    
   ],
-
   "p4": [
     {
       "prop": "restarttime",
@@ -133,7 +142,12 @@
       "type": "number",
       "default": 5
     },
-    { "prop": "loglevel", "title": "LogLevel", "type": "droplist", "data": "loglevelList" },
+    {
+      "prop": "loglevel",
+      "title": "LogLevel",
+      "type": "droplist",
+      "data": "loglevelList"
+    },
     {
       "prop": "logsize",
       "title": "LogSize KB",
@@ -147,20 +161,48 @@
       "default": 7
     }
   ],
-
   "p9": [
     {
       "title": "",
       "type": "table",
       "prop": "unitsTreeTable",
-
       "columns": [
-        { "prop": "name", "title": "ID", "type": "text", "width": 150 },
-        { "prop": "state", "title": "State", "type": "text", "width": 150 },
-        { "prop": "laststart", "title": "Start time", "type": "text", "width": 150 },
-        { "prop": "laststop", "title": "Stoip time", "type": "text", "width": 150 },
-        { "prop": "uptime", "title": "Uptime", "type": "text", "width": 150 },
-        { "prop": "error", "title": "Error", "type": "text", "width": 250 }
+        {
+          "prop": "name",
+          "title": "ID",
+          "type": "text",
+          "width": 150
+        },
+        {
+          "prop": "state",
+          "title": "State",
+          "type": "text",
+          "width": 150
+        },
+        {
+          "prop": "laststart",
+          "title": "Start time",
+          "type": "text",
+          "width": 150
+        },
+        {
+          "prop": "laststop",
+          "title": "Stoip time",
+          "type": "text",
+          "width": 150
+        },
+        {
+          "prop": "uptime",
+          "title": "Uptime",
+          "type": "text",
+          "width": 150
+        },
+        {
+          "prop": "error",
+          "title": "Error",
+          "type": "text",
+          "width": 250
+        }
       ]
     }
   ]
