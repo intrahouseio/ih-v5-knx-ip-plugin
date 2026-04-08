@@ -9,7 +9,7 @@ const app = require('./app');
 
     try {
         const opt = getOptFromArgs();
-        const minversion = '5.17.82';
+        const minversion = '5.19.4';
         const version = opt.version;
         const pluginapi = opt && opt.pluginapi ? opt.pluginapi : 'ih-plugin-api';
         plugin = require(pluginapi + '/index.js')();
@@ -17,11 +17,13 @@ const app = require('./app');
         if (version >= minversion) {
             plugin.log('Plugin is start.');
 
+            plugin.devhard = await plugin.devhard.get()
+
             plugin.params = await plugin.params.get();
             plugin.log('Recieve plugin parametrs: ' + util.inspect(plugin.params), 1);
 
             plugin.channels = await plugin.channels.get();
-            plugin.log('Recieve plugin channels: ' + util.inspect(plugin.channels), 1);
+            //plugin.log('Recieve plugin channels: ' + util.inspect(plugin.channels), 1);
 
             plugin.logger.setParams({ logsize: plugin.params.logsize, logrotate: plugin.params.logrotate });
 
