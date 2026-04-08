@@ -2,7 +2,10 @@ const convert = require('xml-js');
 
 module.exports = {
     async uploadXml(unit, indata, holder) {
+        const channels = this.chano.charr;
+        const channelsmap = await indexChannels(channels);
         const pluginparams = this.doc;
+        const updateAllChannels = pluginparams.importUpdateAll || 0;
         const rsReagexps = pluginparams.importRSregex.split(',')
         const userOptions = {
             r: pluginparams.importR,  //SET ALL CHANNELS TO READ
@@ -16,6 +19,16 @@ module.exports = {
         let orderFirst = 0;
         let orderSecond = 0;
         let orderGA = 0;
+        let updateChCnt = 0;
+
+        async function indexChannels(channels) {
+            return channels.reduce((index, ch) => {
+                const key = ch.chanId;
+                if (!key) { return index }
+                index[key] = ch;
+                return index;
+            }, {});
+        }
 
         mainGA.forEach(function (main) { //FIRST BYTE GA
             let rootFolder = main.attributes.Name
@@ -61,24 +74,29 @@ module.exports = {
                         });
                     }
 
-
-                    chanArray.push({
-                        id: unit + "_" + address.replaceAll('/', '_'),
-                        name: chid,
-                        address: address,
-                        dpt: dpt,
-                        r: userOptions.r == 1 ? 1 : 0,
-                        //rs: userOptions.rs == 1 ? 1 : 0,//
-                        rs: isRS,
-                        w: userOptions.w == 1 ? 1 : 0,
-                        parent: unit + "_" + midFolder + "_" + midIndex,
+                    const chanId = unit + "_" + address.replaceAll('/', '_');
+                    const alreadyHasChan = channelsmap[chanId];
+                    const needtoupdate = updateAllChannels || !alreadyHasChan;
+                    const channel = {
+                        id: chanId,
+                        name: needtoupdate ? chid : alreadyHasChan.chid,
+                        address: needtoupdate ? address : alreadyHasChan.address,
+                        dpt: needtoupdate ? dpt : alreadyHasChan.dpt,
+                        r: needtoupdate ? (userOptions.r == 1 ? 1 : 0) : alreadyHasChan.r,
+                        rs: needtoupdate ? isRS : alreadyHasChan.rs,
+                        w: needtoupdate ? (userOptions.w == 1 ? 1 : 0) : alreadyHasChan.w,
+                        parent: needtoupdate ? `${unit}_${midFolder}_${midIndex}` : alreadyHasChan.parent,
                         order: orderGA++
-                    });
+                    }
 
+                    if (needtoupdate) updateChCnt++;
+                    if (chanArray.length > 0) chanArray.push(channel);
                 })
 
             })
         })
+
+        holder.emit('debug', 'plugin_' + this.id, "Update channels:" + updateChCnt)
         holder.emit('receive:plugin:channels', { unit, data: chanArray });
         return { response: 1 };
     }
