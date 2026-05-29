@@ -12,7 +12,7 @@ module.exports = async function (plugin) {
     const port = plugin.params.port;
     const intrface = plugin.params.intrface;
     const physAddr = plugin.params.physAddr;
-    const wdtime = plugin.params.wdtime || 0;
+    const wdtime = Number(plugin.params.wdtime);
     const reqdelay = plugin.params.reqdelay || 20;
     const reqtimeout = plugin.params.reqtimeout || 200;
     const manualConnect = 0;
@@ -49,7 +49,7 @@ module.exports = async function (plugin) {
                 return convertvalue;
             }
 
-            function runwathdog() {
+            function runWatchdog() {
                 clearTimeout(watchdog);
                 watchdog = setTimeout(() => {
                     plugin.exit(888, "Watchdog active, no has events...")
@@ -194,7 +194,7 @@ module.exports = async function (plugin) {
                         plugin.log('Connected to KNX gateway!');
                         process.send({ type: 'procinfo', data: { connection: 1 } });
 
-                        if (wdtime) { runwathdog() }
+                        if (wdtime) { runWatchdog() }
 
                         await handleChanels();
                         await initWriteChannels();
@@ -204,16 +204,17 @@ module.exports = async function (plugin) {
                         }
                     },
                     event: function (evt, src, dest, value) {
-                        if (wdtime) { runwathdog() }
+                        if (evt !== 'GroupValue_Write' && evt !== 'GroupValue_Response') return;
+                        if (wdtime) { runWatchdog() }
                         let eventchannel = toRead.find(item => item.address == dest);
                         if (eventchannel !== undefined) {
                             eventvalue = dptconvert(value, eventchannel.dpt);
-                            plugin.log("KNX EVENT:" + evt + " src:" + src + " dest:" + dest + " value:" + eventvalue, 1);
                             if (rsFlag) { rsBuffer.push({ id: eventchannel.id, value: eventvalue }) }
                             else { plugin.sendData([{ id: eventchannel.id, value: eventvalue }]) }
                         } else {
                             eventvalue = util.inspect(value);
                         }
+                        plugin.log("KNX EVENT:" + evt + " src:" + src + " dest:" + dest + " value:" + eventvalue, 1);
                     },
                     error: function (connstatus) {
                         isConnected = false;
