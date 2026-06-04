@@ -1,7 +1,7 @@
 {
     "id":"knxip",
     "description":"KNX IP gateway plugin",
-    "comment":"файл .ih используется для опеределения версии и обновлений.",
+    "comment":"https://deep-io.ru",
     "cross":true,
-	"version":"5.0.9"
+	"version":"5.0.10"
 }
