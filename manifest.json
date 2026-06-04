@@ -1,8 +1,9 @@
 {
   "name": "knxip",
   "module": "index.js",
+  "server": "5.19.4",
   "single": 0,
-  "comment": "Это файл-манифест. Содержит настройки, команды плагина. ",
+  "comment": "Developed by Dmitriy Panov || https://deep-io.ru",
   "plugin_popup": [
     {
       "id": "import_xml",
@@ -21,7 +22,15 @@
     "address": "1/1/1"
   },
   "ext": [
-      { "prop": "connection", "note": "IP connection", "vtype": "N" },
-      { "prop": "readonstart", "note": "Read on start", "vtype": "N" }
-    ]
+    {
+      "prop": "connection",
+      "note": "IP connection",
+      "vtype": "N"
+    },
+    {
+      "prop": "readonstart",
+      "note": "Read on start",
+      "vtype": "N"
+    }
+  ]
 }
