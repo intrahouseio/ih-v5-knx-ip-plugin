@@ -3,5 +3,5 @@
     "description":"KNX IP gateway plugin",
     "comment":"https://deep-io.ru",
     "cross":true,
-	"version":"5.0.10"
+	"version":"5.0.11"
 }
